@@ -32,9 +32,10 @@ public class RedirectionFilter extends ZuulFilter {
     public Object run() throws ZuulException {
         RequestContext ctx = RequestContext.getCurrentContext();
         //To pass user after redirects to microservices
-        if(ctx.getRequest().getHeader("authorization" ) != null){
-            String username = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        if (ctx.getRequest().getHeader("authorization") != null) {
+            String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
             ctx.getZuulRequestHeaders().put("username", username);
+            ctx.getZuulRequestHeaders().put("X-Forwarded-From", "ZUUL");
         }
         return null;
     }

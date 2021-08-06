@@ -1,6 +1,7 @@
 package com.disqo.loginservice.controller;
 
 import com.disqo.loginservice.model.LoginRequest;
+import com.disqo.loginservice.model.SignUpUserRequest;
 import com.disqo.loginservice.service.LoginService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
-@RequestMapping("/api")
 public class LoginController {
 
     private final LoginService loginService;
@@ -21,17 +21,17 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/auth")
 //    @ApiOperation(value = "This is login api", notes = "Request contains username and password")
-    public String loginUser(@RequestBody LoginRequest requestDTO, HttpServletRequest request) {
-        return loginService.login(requestDTO, request);
+    public String loginUser(@RequestBody LoginRequest loginRequest) {
+        return loginService.login(loginRequest);
     }
 
-
-    @PostMapping(value = "/hello")
+    @PostMapping(value = "/signup")
 //    @ApiOperation(value = "This is login api", notes = "Request contains username and password")
-    public String loginUser() {
-        return "asdasdasd";
+    public ResponseEntity signUpUser(@RequestBody SignUpUserRequest signUpUserRequest) {
+         loginService.signUp(signUpUserRequest);
+         return ResponseEntity.accepted().build();
     }
 
 }

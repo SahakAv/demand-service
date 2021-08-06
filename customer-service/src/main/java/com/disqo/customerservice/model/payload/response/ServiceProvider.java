@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class ServiceProvider {
 
-    private ServiceType serviceType;
+    private String serviceType;
 
     private String name;
 

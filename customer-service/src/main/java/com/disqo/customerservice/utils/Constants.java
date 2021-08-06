@@ -5,7 +5,8 @@ public class Constants {
 
     public interface RequestMicroServiceConstants {
         String SERVICE_NAME = "request-service";
-        String CREATE_REQUEST_URL = "/request";
+        String CREATE_REQUEST = "/request";
+        String GET_CUSTOMER_REQUESTS = "/request";
     }
 
     public interface ServiceProviderMicroServiceConstants {

@@ -18,4 +18,6 @@ public interface ServiceProviderRepository extends CrudRepository<ServiceProvide
 
 
     Optional<ServiceProvider> findByName(String name);
+
+    List<ServiceProvider> findByOwner(String username);
 }

@@ -3,10 +3,9 @@ package com.disqo.customerservice.controller;
 import com.disqo.customerservice.model.payload.request.CreateServiceRequest;
 import com.disqo.customerservice.model.payload.response.ServiceRequest;
 import com.disqo.customerservice.service.CustomerService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
@@ -20,7 +19,12 @@ public class CustomerController {
 
 
     @PostMapping(value = "/request", consumes = "application/json", produces = "application/json")
-    public ServiceRequest requestService(@RequestBody CreateServiceRequest  createServiceRequest){
-        return customerService.createServiceRequest(createServiceRequest);
+    public ServiceRequest requestService(@RequestBody CreateServiceRequest createServiceRequest, @RequestHeader String username) {
+        return customerService.createServiceRequest(createServiceRequest, username);
+    }
+
+    @GetMapping(value = "/request", produces = "application/json")
+    public List<ServiceRequest> getRequests(@RequestHeader String username) {
+        return customerService.getCustomerRequests(username);
     }
 }

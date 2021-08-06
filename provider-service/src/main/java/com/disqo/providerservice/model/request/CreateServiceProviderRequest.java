@@ -6,6 +6,4 @@ import lombok.Data;
 public class CreateServiceProviderRequest {
     private String serviceTypeName;
     private String serviceProviderName;
-    private String username;
-    private String password;
 }

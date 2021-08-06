@@ -3,11 +3,8 @@ package com.disqo.providerservice.controller;
 import com.disqo.providerservice.model.domain.ServiceProvider;
 import com.disqo.providerservice.model.request.CreateServiceProviderRequest;
 import com.disqo.providerservice.model.response.ServiceProviderResponse;
+import com.disqo.providerservice.model.response.ServiceRequestResponse;
 import com.disqo.providerservice.service.ServiceProviderService;
-import com.netflix.discovery.EurekaClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,12 +17,12 @@ public class ProviderController {
     private final ServiceProviderService serviceProviderService;
 
 
-    public ProviderController(ServiceProviderService serviceProviderService, DiscoveryClient discoveryClient) {
+    public ProviderController(ServiceProviderService serviceProviderService) {
         this.serviceProviderService = serviceProviderService;
     }
 
 
-    @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public ServiceProvider create(@RequestBody CreateServiceProviderRequest request, @RequestHeader String username) {
         return serviceProviderService.create(request, username);
     }
@@ -42,10 +39,35 @@ public class ProviderController {
         return serviceProviderService.getByName(name);
     }
 
-    @GetMapping( produces = "application/json")
-    public List<ServiceProviderResponse> getAllProviders(){
-        return serviceProviderService.
+    @GetMapping(produces = "application/json")
+    public List<ServiceProviderResponse> getAllProviders() {
+        return serviceProviderService.getAll();
     }
 
+
+    @GetMapping(value = "/requests/new", produces = "application/json")
+    //Provide active requests can be assigned to service provider
+    public List<ServiceRequestResponse> getRequestedServices(@RequestHeader String username) {
+        return serviceProviderService.getActives(username);
+    }
+
+    @GetMapping(value = "/request/accept/{requestId}/{providerName}", produces = "application/json")
+    //Accept request
+    public ServiceRequestResponse acceptRequest(@RequestHeader String username, @PathVariable Long requestId,
+                                                @PathVariable String providerName) {
+        return serviceProviderService.acceptRequest(username, requestId, providerName);
+    }
+
+    @GetMapping(value = "/request/close/{requestId}", produces = "application/json")
+    //Close request
+    public ServiceRequestResponse closeRequest(@RequestHeader String username, @PathVariable Long requestId) {
+        return serviceProviderService.closeRequest(username, requestId);
+    }
+
+    @GetMapping(value = "/request/accepted", produces = "application/json")
+    //Accept request
+    public List<ServiceRequestResponse> getAcceptedRequests(@RequestHeader String username) {
+        return serviceProviderService.getAcceptedRequests(username);
+    }
 
 }

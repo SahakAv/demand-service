@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -19,18 +20,22 @@ public class ServiceRequest {
 
     private String address;
 
-    private String date;
+    private LocalDate date;
 
     private String owner;
 
-    private RequestStatus requestStatus;
+    @Enumerated(EnumType.STRING)
+    private RequestStatus status;
+
+    //Assigned provider name
+    private String assigned;
 
     public ServiceRequest(CreateServiceRequest request, String owner){
         this.serviceType = request.getServiceType();
         this.address = request.getAddress();
-        this.date = request.getServiceType();
+        this.date = request.getDate();
         this.owner = owner;
-        this.requestStatus = RequestStatus.NEW;
+        this.status = RequestStatus.NEW;
     }
 
 

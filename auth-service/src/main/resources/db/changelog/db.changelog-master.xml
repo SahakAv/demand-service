@@ -56,13 +56,19 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
             </column>
             <column name="servicetype" type="varchar(250)"/>
             <column name="address" type="varchar(250)"/>
-            <column name="date" type="varchar(250)"/>
+            <column name="date" type="DATE"/>
             <column name="owner" type="varchar(250)"/>
-            <column name="requestStatus" type="varchar(250)"/>
+            <column name="status" type="varchar(250)"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="servicerequest" baseColumnNames="owner"
                                  constraintName="owner_name_fk" referencedTableName="users" referencedColumnNames="username" />
         <addAutoIncrement tableName="servicerequest" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+    </changeSet>
+
+    <changeSet id="4" author="Sahak Avdalyan">
+        <addColumn tableName="servicerequest">
+            <column name="assigned" type="varchar(250)"/>
+        </addColumn>
     </changeSet>
 
 

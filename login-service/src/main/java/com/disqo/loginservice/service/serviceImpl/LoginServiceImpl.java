@@ -1,6 +1,7 @@
 package com.disqo.loginservice.service.serviceImpl;
 
 import com.disqo.loginservice.model.LoginRequest;
+import com.disqo.loginservice.model.SignUpUserRequest;
 import com.disqo.loginservice.model.User;
 import com.disqo.loginservice.repo.UserRepository;
 import com.disqo.loginservice.service.JwtService;
@@ -10,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -27,12 +28,24 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public String login(LoginRequest loginRequest, HttpServletRequest request) {
+    public String login(LoginRequest loginRequest) {
         User user = userRepository.findByUsername(loginRequest.getUsername())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                         INVALID_CREDENTIALS));
         validatePassword(loginRequest, user);
         return jwtService.generateJwtToken(user);
+    }
+
+    @Override
+    public void signUp(SignUpUserRequest signUpUserRequest) {
+        Optional<User> user = userRepository.findByUsername(signUpUserRequest.getUsername());
+        if (user.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    INVALID_USERNAME);
+        }
+        userRepository.save(User.builder()
+                .type(signUpUserRequest.getUserType()).username(signUpUserRequest.getUsername())
+                .password(BCrypt.hashpw(signUpUserRequest.getPassword(), BCrypt.gensalt())).build());
     }
 
 
@@ -43,6 +56,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
 
-    private static String INVALID_CREDENTIALS = "Please provider valid credentials";
+    private static final String INVALID_CREDENTIALS = "Please provide valid credentials";
+    private static final String INVALID_USERNAME = "User by this username is already registered";
 
 }

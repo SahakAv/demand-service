@@ -10,12 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
-import java.util.Base64;
-import java.util.Date;
-import java.util.Objects;
 
 
 @Component
@@ -34,7 +30,6 @@ public class JwtTokenProvider {
         this.jwtProperties = jwtProperties;
         this.loginService = loginService;
     }
-
 
 
     public Authentication getAuthentication(String token) {
@@ -61,7 +56,7 @@ public class JwtTokenProvider {
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser()
-                       .setSigningKey(DatatypeConverter.parseBase64Binary(jwtProperties.getSecretKey()))
+                    .setSigningKey(DatatypeConverter.parseBase64Binary(jwtProperties.getSecretKey()))
                     .parseClaimsJws(authToken);
             return true;
         } catch (SignatureException e) {
