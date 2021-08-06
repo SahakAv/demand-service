@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+
+    <changeSet id="1" author="Sahak Avdalyan">
+        <createTable tableName="users">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="user_id_pk" />
+            </column>
+            <column name="username" type="varchar(250)">
+                <constraints unique="true" uniqueConstraintName="username_unq" />
+            </column>
+            <column name="password" type="varchar(250)"/>
+            <column name="type" type="varchar(250)"/>
+        </createTable>
+        <addAutoIncrement tableName="users" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+    </changeSet>
+
+    <changeSet id="2" author="Sahak Avdalyan">
+        <createTable tableName="servicetype">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="servicetype_id_pk" />
+            </column>
+            <column name="servicename" type="varchar(250)">
+                <constraints unique="true" uniqueConstraintName="servicename_unq" />
+            </column>
+        </createTable>
+        <createTable tableName="serviceprovider">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="item_id_pk" />
+            </column>
+            <column name="name" type="varchar(250)" />
+            <column name="servicetype_id" type="bigint">
+                <constraints nullable="false" notNullConstraintName="type_id_nn" />
+            </column>
+            <column name="owner" type="varchar(250)"/>
+        </createTable>
+        <addAutoIncrement tableName="servicetype" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+        <addAutoIncrement tableName="serviceprovider" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+        <createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1" />
+        <addForeignKeyConstraint baseTableName="serviceprovider" baseColumnNames="servicetype_id"
+                                 constraintName="service_name_id_fk" referencedTableName="servicetype" referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="serviceprovider" baseColumnNames="owner"
+                                 constraintName="owner_username_fk" referencedTableName="users" referencedColumnNames="username" />
+    </changeSet>
+
+
+    <changeSet id="3" author="Sahak Avdalyan">
+        <createTable tableName="servicerequest">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="servicerequest_id_pk" />
+            </column>
+            <column name="servicetype" type="varchar(250)"/>
+            <column name="address" type="varchar(250)"/>
+            <column name="date" type="varchar(250)"/>
+            <column name="owner" type="varchar(250)"/>
+            <column name="requestStatus" type="varchar(250)"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="servicerequest" baseColumnNames="owner"
+                                 constraintName="owner_name_fk" referencedTableName="users" referencedColumnNames="username" />
+        <addAutoIncrement tableName="servicerequest" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+    </changeSet>
+
+
+</databaseChangeLog>
