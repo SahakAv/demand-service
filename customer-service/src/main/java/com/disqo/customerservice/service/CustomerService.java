@@ -8,7 +8,7 @@ import java.util.List;
 public interface CustomerService {
 
 
-     ServiceRequest createServiceRequest(CreateServiceRequest createServiceRequest, String username);
+    ServiceRequest createServiceRequest(CreateServiceRequest createServiceRequest, String username);
 
-     List<ServiceRequest> getCustomerRequests(String username);
+    List<ServiceRequest> getCustomerRequests(String username);
 }

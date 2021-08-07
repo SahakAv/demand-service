@@ -9,6 +9,7 @@ The main idea of this platform would be to provide service to the customers on d
 * Java 11
 * Spring Boot
 * Zuul Netflix Proxy
+* Feign declarative client
 * PostgreSQL database
 * Eureka service discovery server
 * Docker  compose 
@@ -25,10 +26,9 @@ entrypoint and proxy them to microservices
 </p>
 
 Auth-service is deployed as ZUUL proxy which will handle all requests, do authentication with login service
-then verify requested microservice service name from Eureka service discovery and request to microservice
-Authentication service is a single entrypoint for all requests to all microservices, it will proxy them by a registred 
-service in Eureka.  For authentication JWT tokens is used.
-
+then verify requested microservice service name from Eureka service discovery and request to MS
+Authentication service is a single entry point for all requests to all microservices, it will proxy them by a registered service in Eureka.  For authentication, JWT tokens are used.
+Communication between microservices done by Feign declarative rest client.
 
 
 ### Local deployment
@@ -43,8 +43,8 @@ service in Eureka.  For authentication JWT tokens is used.
    docker-compose build && docker-compose up
    ```
 4. Verify services 
-* 8761 port should be opened for eureka http://localhost:8761/
-* 8080 proxy authentication service should be runned
+* 8761 port should be opened for Eureka http://localhost:8761/
+* 8080 proxy authentication service should be deployed
 
 
 ## Usage

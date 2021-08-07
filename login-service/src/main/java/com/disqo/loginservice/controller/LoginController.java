@@ -21,13 +21,11 @@ public class LoginController {
     }
 
     @PostMapping(value = "/auth")
-//    @ApiOperation(value = "This is login api", notes = "Request contains username and password")
     public String loginUser(@RequestBody LoginRequest loginRequest) {
         return loginService.login(loginRequest);
     }
 
     @PostMapping(value = "/signup")
-//    @ApiOperation(value = "This is login api", notes = "Request contains username and password")
     public ResponseEntity signUpUser(@RequestBody SignUpUserRequest signUpUserRequest) {
         log.info("Requested to register user {} with type {}", signUpUserRequest.getUsername(), signUpUserRequest.getUserType());
         loginService.signUp(signUpUserRequest);

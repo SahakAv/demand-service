@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
 
-
 @Component
 public class ApplicationStartUp {
 

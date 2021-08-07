@@ -23,7 +23,6 @@ public class ServiceProvider {
     private String owner;
 
 
-
     public ServiceProvider(CreateServiceProviderRequest request, ServiceType serviceType, String username) {
         this.serviceType = serviceType;
         this.name = request.getServiceProviderName();

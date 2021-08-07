@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import static com.disqo.requestservice.utils.Constants.LoginMicroServiceConstants.SERVICE_NAME;
 import static com.disqo.requestservice.utils.Constants.LoginMicroServiceConstants.GET_USER_BY_USERNAME;
+import static com.disqo.requestservice.utils.Constants.LoginMicroServiceConstants.SERVICE_NAME;
 
 @Service
 @FeignClient(name = SERVICE_NAME, url = "${login.service.url}")

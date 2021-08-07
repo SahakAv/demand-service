@@ -6,5 +6,5 @@ public enum RequestStatus {
     //Provider picked request
     ASSIGNED_TO_PROVIDER,
     //Provider closed request
-    CLOSED;
+    CLOSED
 }

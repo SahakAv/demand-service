@@ -6,8 +6,8 @@ import com.disqo.providerservice.model.domain.ServiceType;
 import com.disqo.providerservice.model.request.CreateServiceProviderRequest;
 import com.disqo.providerservice.model.request.ServiceProviders;
 import com.disqo.providerservice.model.request.ServiceTypes;
-import com.disqo.providerservice.model.response.ServiceRequestResponse;
 import com.disqo.providerservice.model.response.ServiceProviderResponse;
+import com.disqo.providerservice.model.response.ServiceRequestResponse;
 import com.disqo.providerservice.repository.ServiceProviderRepository;
 import com.disqo.providerservice.repository.ServiceTypeRepo;
 import com.disqo.providerservice.service.ServiceProviderService;
@@ -106,7 +106,7 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
         ServiceRequestResponse serviceRequest = requestServiceClient.getById(requestId);
         List<String> userServiceProvidersNames = serviceProviderRepo.findByOwner(username)
                 .stream().map(ServiceProvider::getName).collect(Collectors.toList());
-        if(!userServiceProvidersNames.contains(serviceRequest.getAssigned())){
+        if (!userServiceProvidersNames.contains(serviceRequest.getAssigned())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Only service provider can close request");
         }

@@ -21,5 +21,4 @@ public class ServiceRequest {
     private String assigned;
 
 
-
 }

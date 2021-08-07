@@ -17,8 +17,8 @@ public class CustomErrorDecoder implements ErrorDecoder {
     @SneakyThrows
     @Override
     public Exception decode(String methodKey, Response response) {
-       ExceptionMessage message =  new ObjectMapper()
-               .readValue(response.body().asReader(Charset.defaultCharset()),ExceptionMessage.class);
+        ExceptionMessage message = new ObjectMapper()
+                .readValue(response.body().asReader(Charset.defaultCharset()), ExceptionMessage.class);
         return new ResponseStatusException(HttpStatus.resolve(response.status()), message.getMessage());
     }
 }

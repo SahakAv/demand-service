@@ -2,8 +2,8 @@ package com.disqo.providerservice.service;
 
 import com.disqo.providerservice.model.domain.ServiceProvider;
 import com.disqo.providerservice.model.request.CreateServiceProviderRequest;
-import com.disqo.providerservice.model.response.ServiceRequestResponse;
 import com.disqo.providerservice.model.response.ServiceProviderResponse;
+import com.disqo.providerservice.model.response.ServiceRequestResponse;
 
 import java.util.List;
 

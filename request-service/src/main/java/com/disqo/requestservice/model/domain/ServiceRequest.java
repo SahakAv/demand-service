@@ -30,7 +30,7 @@ public class ServiceRequest {
     //Assigned provider name
     private String assigned;
 
-    public ServiceRequest(CreateServiceRequest request, String owner){
+    public ServiceRequest(CreateServiceRequest request, String owner) {
         this.serviceType = request.getServiceType();
         this.address = request.getAddress();
         this.date = request.getDate();

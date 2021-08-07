@@ -10,7 +10,7 @@ public class UserResponse {
     private String password;
     private UserType type;
 
-    public UserResponse(User user){
+    public UserResponse(User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.type = user.getType();
