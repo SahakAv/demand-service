@@ -48,7 +48,7 @@ entrypoint and proxy them to microservices
 
 
 <p align="center">
-    <img src="images/diagram.jpg" alt="Logo">
+    <img src="images/diagram.PNG" alt="Logo">
 </p>
 
 Auth-service is deployed as ZUUL proxy which will handle all requests, do authentication with login service
