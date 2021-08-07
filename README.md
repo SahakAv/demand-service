@@ -1,29 +1,3 @@
-
-
-<br />
-<p align="center">
-    <img src="images/diagram.PNG" alt="Logo">
-
-
-<h3 align="center">Best-README-Template</h3>
-
-  <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
-  </p>
-</p>
-
-
-
-<!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
@@ -51,44 +25,39 @@
 
 
 
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+Demand service DISQO interview task implementation
+The main idea of this platform would be to provide service to the customers on demand.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
 ### Built With
+* Java 11
+* Spring Boot
+* Zuul Netflix Proxy
+* PostgreSQL database
+* Eureka service discovery server
+* Docker  compose 
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+
+### High  level architecture overview
+
+Eureka server and ZUUL proxy are build to have single JWT authentication 
+entrypoint and proxy them to microservices
 
 
+<p align="center">
+    <img src="images/diagram.jpg" alt="Logo">
+</p>
 
-<!-- GETTING STARTED -->
-## Getting Started
+Auth-service is deployed as ZUUL proxy which will handle all requests, do authentication with login service
+then verify requested microservice service name from Eureka service discovery and request to microservice
+Authentication service is a single entrypoint for all requests to all microservices, it will proxy them by a registred 
+service in Eureka.
+For authentication JWT tokens is used.
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
