@@ -139,3 +139,73 @@ response
     "assigned": null
 }
  ```
+### Verify requests that can be assigned
+Service provider can verify new created requests
+GET
+```sh
+http://localhost:8080/provider-service/provider/requests/new
+ ```
+
+response
+```sh
+[
+    {
+        "id": "6",
+        "serviceType": "clean",
+        "date": "2015-05-04",
+        "address": "Cempty ",
+        "status": "NEW",
+        "owner": "user",
+        "assigned": null
+    },
+    {
+        "id": "7",
+        "serviceType": "clean",
+        "date": "2015-05-04",
+        "address": "Cempty ",
+        "status": "NEW",
+        "owner": "user",
+        "assigned": null
+    }
+]
+ ```
+
+### Accept request
+Service provider can verify new created requests
+GET
+```sh
+http://localhost:8080/provider-service/provider/request/accept/11/CLEANING service
+ ```
+
+response
+```sh
+{
+    "id": "6",
+    "serviceType": "clean",
+    "date": "2015-05-04",
+    "address": "Cempty ",
+    "status": "ASSIGNED_TO_PROVIDER",
+    "owner": "user",
+    "assigned": "CLEANING service"
+}
+ ```
+
+### Close request
+Service provider can verify new created requests
+GET
+```sh
+http://localhost:8080/provider-service/provider/request/close/6
+ ```
+
+response
+```sh
+{
+    "id": "6",
+    "serviceType": "clean",
+    "date": "2015-05-04",
+    "address": "Cempty ",
+    "status": "CLOSED",
+    "owner": "user",
+    "assigned": "CLEANING service"
+}
+ ```
