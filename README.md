@@ -2,7 +2,7 @@
 
 <br />
 <p align="center">
-    <img src="images/diagram.jpg" alt="Logo">
+    <img src="images/diagram.PNG" alt="Logo">
 
 
 <h3 align="center">Best-README-Template</h3>
