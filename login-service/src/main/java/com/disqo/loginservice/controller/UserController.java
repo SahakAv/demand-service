@@ -3,6 +3,10 @@ package com.disqo.loginservice.controller;
 import com.disqo.loginservice.model.User;
 import com.disqo.loginservice.model.response.UserResponse;
 import com.disqo.loginservice.repo.UserRepository;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +19,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
+
+
 
     private final UserRepository userRepository;
 
@@ -26,6 +33,7 @@ public class UserController {
 
     @GetMapping(value = "/{username}", produces = "application/json")
     public UserResponse getByUserName(@PathVariable String username) {
+        log.info("Requested to get user by username {}", username);
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         return new UserResponse(user);

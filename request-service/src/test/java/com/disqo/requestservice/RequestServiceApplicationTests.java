@@ -3,10 +3,10 @@ package com.disqo.requestservice;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class RequestServiceApplicationTests {
 
-    @Test
+//    @Test
     void contextLoads() {
     }
 

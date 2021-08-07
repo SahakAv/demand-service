@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  pg:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: demands
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  eureka-server:
+    build: ./eureka-server/
+    ports:
+      - "8761:8761"
+    depends_on:
+      - pg
+  auth-service:
+    build: ./auth-service/
+
+    ports:
+      - "8080:8080"
+    depends_on:
+      - pg
+      - eureka-server
+  login-service:
+    build: ./login-service/
+    depends_on:
+      - pg
+      - auth-service
+      - eureka-server
+  customer-service:
+    build: ./customer-service/
+    depends_on:
+      - auth-service
+      - eureka-server
+  request-service:
+    build: ./request-service/
+    depends_on:
+      - auth-service
+      - eureka-server
+  provider-service:
+    build: ./provider-service/
+    depends_on:
+      - auth-service
+      - eureka-server

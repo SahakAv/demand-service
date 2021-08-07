@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import static com.disqo.authservice.utils.Constants.LoginMicroServiceConstants.GET_BY_USERNAME;
 
-@FeignClient(name = "login-service", url = "${login.service.url}")
+@FeignClient(name = "login-service", url = "login-service")
 @Service
 public interface LoginServiceClient {
 

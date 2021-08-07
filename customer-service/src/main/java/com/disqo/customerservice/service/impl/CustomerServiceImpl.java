@@ -7,6 +7,7 @@ import com.disqo.customerservice.model.payload.response.ServiceProvider;
 import com.disqo.customerservice.model.payload.response.ServiceRequest;
 import com.disqo.customerservice.model.payload.response.ServiceType;
 import com.disqo.customerservice.service.CustomerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
     private final RequestServiceClient serviceClient;
@@ -45,6 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
             ServiceProvider serviceProvider = serviceProviderClient.getServiceProviderByName(serviceProviderName);
             if (!serviceProvider.getServiceType().equals(serviceRequest.getServiceType())) {
                 //Requested service type amd service provider service type should be same
+                log.error("Invalid service provider name {} passed for creating service request", serviceProviderName);
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         String.format("Service provider %s service type is %s, but requested service %s",
                                 serviceProviderName, serviceProvider.getServiceType(), serviceType.getServiceName()));

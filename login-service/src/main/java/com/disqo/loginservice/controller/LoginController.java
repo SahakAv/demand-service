@@ -3,16 +3,15 @@ package com.disqo.loginservice.controller;
 import com.disqo.loginservice.model.LoginRequest;
 import com.disqo.loginservice.model.SignUpUserRequest;
 import com.disqo.loginservice.service.LoginService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
+@Slf4j
 public class LoginController {
 
     private final LoginService loginService;
@@ -30,8 +29,10 @@ public class LoginController {
     @PostMapping(value = "/signup")
 //    @ApiOperation(value = "This is login api", notes = "Request contains username and password")
     public ResponseEntity signUpUser(@RequestBody SignUpUserRequest signUpUserRequest) {
-         loginService.signUp(signUpUserRequest);
-         return ResponseEntity.accepted().build();
+        log.info("Requested to register user {} with type {}", signUpUserRequest.getUsername(), signUpUserRequest.getUserType());
+        loginService.signUp(signUpUserRequest);
+        log.info("User {} successfully signup", signUpUserRequest.getUsername());
+        return ResponseEntity.accepted().build();
     }
 
 }

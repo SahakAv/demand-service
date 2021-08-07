@@ -1,1 +1,8 @@
 rootProject.name = 'demand-service'
+
+include('auth-service')
+include('customer-service')
+include('eureka-server')
+include('login-service')
+include('provider-service')
+include('request-service')
