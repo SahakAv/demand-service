@@ -112,7 +112,7 @@ response
     "owner": "admin"
 }
  ```
-### Create customer request
+### Create service request
 Service type should exist, service provider is optional(if exist will be validated )
 
 POST
