@@ -83,3 +83,59 @@ with body
 }
    ```
 then login with auth to get JWT token
+
+
+# Service flow example
+All requests should use jwt token on Authorization header
+### Create service provider
+ 
+POST 
+```sh
+http://localhost:8080/provider-service/provider
+ ```
+body 
+```sh
+{
+    "serviceTypeName" : "clean",
+    "serviceProviderName" : "CLEANING service"
+}
+ ```
+response 
+```sh
+{
+    "id": 1,
+    "serviceType": {
+        "id": 1,
+        "serviceName": "clean"
+    },
+    "name": "CLEANING service",
+    "owner": "admin"
+}
+ ```
+### Create customer request
+Service type should exist, service provider is optional(if exist will be validated )
+
+POST
+```sh
+http://localhost:8080/customer-service/customer/request
+ ```
+body
+```sh
+{   
+    "serviceType" : "clean",
+    "serviceProvider" : "CLEANING service",
+     "address" : "some address",
+      "date" :  "2015-05-04"
+}
+ ```
+response
+```sh
+{
+    "id": 7,
+    "serviceType": "clean",
+    "address": "some address ",
+    "date": "2015-05-04",
+    "status": "NEW",
+    "assigned": null
+}
+ ```

@@ -52,7 +52,7 @@ public class ProviderController {
 
 
     @GetMapping(value = "/requests/new", produces = "application/json")
-    //Provide active requests can be assigned to service provider
+    //Active requests that can be assigned to service provider
     public List<ServiceRequestResponse> getRequestedServices(@RequestHeader String username) {
         log.info("User {} requested to get all new requests", username );
         return serviceProviderService.getActives(username);
