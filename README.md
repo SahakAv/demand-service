@@ -171,7 +171,7 @@ response
  ```
 
 ### Accept request
-Service provider can verify new created requests
+Service provider can accept requests
 GET
 ```sh
 http://localhost:8080/provider-service/provider/request/accept/11/CLEANING service
@@ -191,7 +191,7 @@ response
  ```
 
 ### Close request
-Service provider can verify new created requests
+Service provider can close requests
 GET
 ```sh
 http://localhost:8080/provider-service/provider/request/close/6
