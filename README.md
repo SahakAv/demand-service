@@ -26,7 +26,7 @@ entrypoint and proxy them to microservices
 </p>
 
 Auth-service is deployed as ZUUL proxy which will handle all requests, do authentication with login service
-then verify requested microservice service name from Eureka service discovery and request to MS
+then verify requested microservice service name from Eureka service discovery and request to MS.
 Authentication service is a single entry point for all requests to all microservices, it will proxy them by a registered service in Eureka.  For authentication, JWT tokens are used.
 Communication between microservices done by Feign declarative rest client.
 
